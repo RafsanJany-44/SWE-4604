@@ -1,0 +1,44 @@
+package com.example.tests;
+
+import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
+import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import java.util.regex.Pattern;
+import static org.apache.commons.lang3.StringUtils.join;
+
+public class RafsanjanyWebTest {
+	private Selenium selenium;
+
+	@Before
+	public void setUp() throws Exception {
+		WebDriver driver = new FirefoxDriver();
+		String baseUrl = "https://www.google.com/";
+		selenium = new WebDriverBackedSelenium(driver, baseUrl);
+	}
+
+	@Test
+	public void testRafsanjanyWeb() throws Exception {
+		selenium.open("https://rafsanjany.com/");
+		selenium.click("link=My Story");
+		selenium.click("xpath=(//a[contains(text(),'Work and Experience')])[2]");
+		selenium.click("link=Tools");
+		selenium.click("link=Contact");
+		selenium.click("link=Home");
+		selenium.click("//footer[@id='colophon']/div/div/div/div/section/div/div/div/div/div/section/div/div/div[2]/div/div/div/div/div/div[2]/a/i");
+		selenium.selectWindow("win_ser_1");
+		selenium.selectWindow("win_ser_local");
+		selenium.selectWindow("win_ser_1");
+		selenium.close();
+		selenium.selectWindow("win_ser_local");
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		selenium.stop();
+	}
+}
